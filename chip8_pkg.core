@@ -1,0 +1,14 @@
+CAPI=2:
+name: "chip8:chip8_pkg:0.1"
+description: "Header package for CHIP-8"
+
+filesets:
+  files_rtl:
+    files:
+      - rtl/chip8_pkg.sv
+    file_type: systemVerilogSource
+
+targets:
+  default:
+    filesets:
+      - files_rtl
