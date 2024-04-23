@@ -1,0 +1,22 @@
+parameters:
+  {name}_configs: []
+
+steps:
+  - ${{ each config in parameters.{name}_configs }}:
+    - bash: |
+        fusesoc --cores-root . run --target=lint --tool=verilator {name}:{name}_top
+        if [ $? != 0 ]; then
+          echo -n "##vso[task.logissue type=error]"
+          echo "Verilog lint failed. Run 'fusesoc --cores-root . run --target=lint --tool=verilator {name}:{name}_top' to check and fix all errors."
+          exit 1
+        fi
+      displayName: Lint Verilog source files with Verilator for ${{ config }}
+
+    - bash: |
+        fusesoc --cores-root . run --target=lint --tool=veriblelint {name}:{name}_top
+        if [ $? != 0 ]; then
+          echo -n "##vso[task.logissue type=error]"
+          echo "Verilog lint failed. Run 'fusesoc --cores-root . run --target=lint --tool=veriblelint {name}:{name}_top' to check and fix all errors."
+          exit 1
+        fi
+      displayName: Lint Verilog source files with Verible Verilog Lint for ${{ config }}

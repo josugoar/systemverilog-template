@@ -1,21 +1,20 @@
 CAPI=2:
-name: "chip8:chip8_top:0.1"
-description: "CHIP-8"
+name: "{name}:{name}_core"
+description: "{name}"
 
 filesets:
   files_rtl:
     depend:
-      - chip8:chip8_pkg
-      - chip8:chip8_core
+      - {name}:{name}_pkg
     files:
-      - rtl/chip8_top.sv
+      - rtl/{name}_core.sv
     file_type: systemVerilogSource
 
 targets:
   default: &default_target
     filesets:
       - files_rtl
-    toplevel: chip8_top
+    toplevel: {name}_core
   lint:
     <<: *default_target
     default_tool: verilator
@@ -28,12 +27,8 @@ targets:
     filesets:
       - files_rtl
     default_tool: veribleformat
-    toplevel: chip8_top
+    toplevel: {name}_core
     tools:
       veribleformat:
         verible_format_args:
           - "--inplace"
-          - "--formal_parameters_indentation=indent"
-          - "--named_parameter_indentation=indent"
-          - "--named_port_indentation=indent"
-          - "--port_declarations_indentation=indent"

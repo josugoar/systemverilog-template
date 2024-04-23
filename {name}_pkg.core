@@ -1,11 +1,11 @@
 CAPI=2:
-name: "chip8:chip8_pkg:0.1"
-description: "Header package for CHIP-8"
+name: "{name}:{name}_pkg:0.1"
+description: "Header package for {name}"
 
 filesets:
   files_rtl:
     files:
-      - rtl/chip8_pkg.sv
+      - rtl/{name}_pkg.sv
     file_type: systemVerilogSource
 
 targets:
